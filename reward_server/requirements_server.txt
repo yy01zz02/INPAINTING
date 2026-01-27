@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+torch>=2.1.0
+open_clip_torch
+hpsv2
+image-reward
+Pillow
+numpy
+python-multipart
+urllib3

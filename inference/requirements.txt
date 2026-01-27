@@ -1,0 +1,22 @@
+# Core dependencies
+torch
+torchvision
+
+# Diffusion models
+diffusers
+transformers
+accelerate
+
+# Image processing
+opencv-python
+Pillow
+numpy
+
+# Optional but recommended
+safetensors
+scipy
+ftfy
+peft
+
+# For better performance (optional)
+xformers

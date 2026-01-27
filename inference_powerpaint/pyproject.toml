@@ -1,0 +1,18 @@
+[project]
+name = "generate-power"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate==0.20.3",
+    "controlnet-aux==0.0.3",
+    "diffusers==0.27.0",
+    "gradio==3.41.0",
+    "opencv-python>=4.11.0.86",
+    "torch>=2.9.1",
+    "torchvision>=0.24.1",
+    "transformers==4.30.0",
+    "huggingface_hub==0.20.2"
+]
+
