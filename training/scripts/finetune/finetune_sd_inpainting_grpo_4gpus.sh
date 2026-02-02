@@ -16,13 +16,10 @@ mkdir -p logs
 
 
 
-# NOTE: Set MODEL_PATH and DATA_JSON_PATH environment variables before running
-# export MODEL_PATH="/path/to/stable-diffusion-inpainting"
-# export DATA_JSON_PATH="/path/to/train_metadata.jsonl"
-
 echo "Starting SD1.5 Inpainting GRPO training..."
-echo "Configuration: 4 GPUs, No FSDP (SD1.5 fits in single GPU), CLIP + HPS API Reward (1:1)"
 
+
+# Run with accelerate for multi-GPU support
 uv run accelerate launch --num_processes 4 --main_process_port 19005 fastvideo/train_grpo_sd_inpainting.py \
     --config=fastvideo/config_sd/inpainting.py \
     --config.seed=42 \
@@ -34,7 +31,7 @@ uv run accelerate launch --num_processes 4 --main_process_port 19005 fastvideo/t
     --config.mixed_precision="bf16" \
     --config.allow_tf32=True \
     --config.use_lora=False \
-    --config.pretrained.model="${MODEL_PATH:-/path/to/stable-diffusion-inpainting}" \
+    --config.pretrained.model="<PATH_TO_SD15_INPAINTING_MODEL>" \
     --config.sample.num_steps=50 \
     --config.sample.eta=1.0 \
     --config.sample.guidance_scale=7.5 \
@@ -48,7 +45,7 @@ uv run accelerate launch --num_processes 4 --main_process_port 19005 fastvideo/t
     --config.train.cfg=True \
     --config.train.adv_clip_max=5.0 \
     --config.train.clip_range=1e-4 \
-    --config.data_json_path="${DATA_JSON_PATH:-/path/to/train_metadata.jsonl}" \
+    --config.data_json_path="data/inpainting/train_metadata.jsonl" \
     --config.reward_type="clip" \
     --config.num_generations=8 \
     --config.max_train_steps=500 \

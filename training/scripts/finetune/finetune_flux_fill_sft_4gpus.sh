@@ -13,16 +13,13 @@ mkdir -p images
 mkdir -p data/outputs/flux_fill_sft
 mkdir -p logs
 
-# NOTE: Set MODEL_PATH and DATA_JSON_PATH environment variables before running
-# export MODEL_PATH="/path/to/FLUX.1-Fill-dev"
-# export DATA_JSON_PATH="/path/to/train_preprocessed.json"
-
 echo "Starting Flux Fill SFT training (Full Fine-tuning)..."
 echo "Configuration: 4 GPUs with FSDP sharding"
 
+# Run with torchrun for distributed training
 uv run torchrun --nproc_per_node=4 --master_port=19008 fastvideo/train_sft_flux_fill.py \
-    --model_path="${MODEL_PATH:-/path/to/FLUX.1-Fill-dev}" \
-    --data_json_path="${DATA_JSON_PATH:-/path/to/train_preprocessed.json}" \
+    --model_path="<PATH_TO_FLUX_FILL_MODEL>" \
+    --data_json_path="data/inpainting/train_preprocessed.json" \
     --output_dir="data/outputs/flux_fill_sft" \
     --final_model_dir="data/outputs/flux_fill_sft/final_model" \
     --train_batch_size=1 \
@@ -36,7 +33,7 @@ uv run torchrun --nproc_per_node=4 --master_port=19008 fastvideo/train_sft_flux_
     --lr_scheduler="cosine" \
     --h=512 \
     --w=512 \
-    --sampling_steps=28 \
+    --sampling_steps=20 \
     --shift=1.0 \
     --fsdp_sharding_strategy="full_shard" \
     --gradient_checkpointing \

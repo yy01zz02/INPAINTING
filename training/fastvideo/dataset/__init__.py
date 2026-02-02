@@ -6,13 +6,7 @@ from fastvideo.dataset.t2v_datasets import T2V_dataset
 from fastvideo.dataset.transform import (CenterCropResizeVideo, Normalize255,
                                          TemporalRandomCrop)
 
-# Import new datasets for instruction editing and inpainting
-from fastvideo.dataset.latent_flux_kontext_rl_datasets import (
-    FluxKontextDataset,
-    FluxKontextLatentDataset,
-    flux_kontext_collate_function,
-    flux_kontext_latent_collate_function,
-)
+# Import datasets for inpainting
 from fastvideo.dataset.latent_flux_fill_rl_datasets import (
     FluxFillLatentDataset,
     flux_fill_latent_collate_function,
